@@ -7,29 +7,68 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    //
-    public function index(){
-        //Eloquent ORM to get all the data from the Comment table in the database
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        //
         $data = Comment::all();
 
         //Pass the data to the view
-        return view('comment.index', ['comments' => $data , 'PageTitle'=> 'comment Page']);
-
-        // $data = Comment::with('post')->get(); 
-        // return response()->json($data);
+        return view('comment.index', ['comments' => $data, 'PageTitle' => 'comment Page']);
     }
 
-    public function create() {
-    //  Comment::create([
-    //     'author' => 'Kinan alnabolsi',
-    //     'content' => 'This is a new Comment',
-    //     'post_id' => 3,
-    //  ]);
-
-    Comment::factory(5)->create();
-
-     return redirect("./comment");
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+        return view('comment.create', ['PageTitle' => 'create comment Page']);
     }
 
-    
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+        $comment = Comment::findOrFail($id);
+
+        return view('comment.show', ['comment' => $comment, 'PageTitle' => $comment->author]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+        return view('comment.edit', ['PageTitle' => 'Edit comment Page']);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
 }
